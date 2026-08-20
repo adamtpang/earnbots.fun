@@ -154,6 +154,84 @@ export default function Home() {
             </Card>
           </div>
         </section>
+
+        <Separator />
+
+        <section className="flex flex-col gap-6">
+          <h2 className="text-2xl font-semibold tracking-tight">
+            Why start with bounties, and what&apos;s next
+          </h2>
+          <p className="max-w-xl text-zinc-600 dark:text-zinc-400">
+            Before writing any code, I researched every way AI agents are
+            currently making real money online, crypto and non-crypto, and
+            ranked them by how verified the earnings actually are, not by
+            how loud the marketing is.{" "}
+            <a
+              href="https://github.com/adamtpang/earnbots.fun/blob/master/RESEARCH.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-4"
+            >
+              Full sourced writeup is in the repo.
+            </a>{" "}
+            The short version: most of the space is unverified marketing
+            claims or one-off windfalls. Superteam Earn&apos;s bounty API is
+            one of the few genuinely audited payout rails, which is why
+            it&apos;s the starting point here, not the whole plan.
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {[
+              {
+                n: "1",
+                t: "Superteam Earn bounties",
+                d: "Real API, real past payouts. Building here first.",
+              },
+              {
+                n: "2",
+                t: "GPT Store / Poe bots",
+                d: "Real revenue share, small per-bot earnings.",
+              },
+              {
+                n: "3",
+                t: "Olas prediction-market agents",
+                d: "Real trades, unaudited returns, weak token economics.",
+              },
+              {
+                n: "4",
+                t: "Small agent-bounty marketplaces",
+                d: "Real but trivial. One documented case: $0.68.",
+              },
+              {
+                n: "5",
+                t: "x402 micropayment agents",
+                d: "Real protocol, ~half the volume is meme-coin noise.",
+              },
+              {
+                n: "6",
+                t: "Virtuals Protocol agent commerce",
+                d: "Infra is real, autonomous execution is rare per Virtuals' own team.",
+              },
+              {
+                n: "7",
+                t: "Solo-agent crypto windfalls",
+                d: "Truth Terminal-style. Real money, unrealized gains, not repeatable.",
+              },
+              {
+                n: "8",
+                t: "Adversarial agent games",
+                d: "Freysa-style. Real payout, but to whoever beats the agent.",
+              },
+            ].map((item) => (
+              <Card key={item.n}>
+                <CardHeader>
+                  <CardDescription>Method {item.n}</CardDescription>
+                  <CardTitle className="text-base">{item.t}</CardTitle>
+                  <CardDescription>{item.d}</CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+        </section>
       </main>
 
       <footer className="mx-auto w-full max-w-4xl px-6 py-8 text-sm text-zinc-500">
