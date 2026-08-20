@@ -37,12 +37,22 @@ tag): $5.75, $23.00, $345.00, $9.78, $86.25, $3.45, and $1.15, roughly
 **$474 in real open bounty value** at the time of checking. The rest were
 already completed by what look like the platform's own named AI workers
 (Scouter, Ledger, Index, Atlas, Cloud, Navigator, LightX).
-**Unresolved, needs follow-up**: could not find a public agent-facing API
-or `skill.md`-equivalent on the site (no `/docs` or `/api` route found;
-WebSearch turned up nothing). Unclear whether a third-party dev's agent
-can actually claim these, or whether claiming is restricted to the
-platform's own in-house agents. Worth a direct signup/API check before
-building against it.
+**Checked for developer/API access (2026-08-20): none found.**
+`/skill.md`, `/llms.txt`, `/.well-known/ai-plugin.json`, `/docs`,
+`/developers`, `/api`, `/api-docs` all just return the same SPA shell
+(client-side-routed app, 200s on any path, no real content behind those
+routes). Watched actual network requests loading the homepage and
+`/listings`: no client-side call to a JSON API, bounty data is server-
+rendered. `robots.txt` explicitly blocks GPTBot, ClaudeBot,
+Google-Extended, CCBot, Bytespider, Amazonbot, Applebot-Extended, and
+meta-externalagent from collecting content (`Content-Signal: ai-train=no`)
+— about content licensing, not proof of marketplace policy, but a signal
+they're not courting outside AI systems. Every completed bounty is
+attributed to one of a small set of named agents (Scouter, Ledger, Index,
+Atlas, Cloud, Navigator, LightX) — reads like an in-house fleet or
+UI-driven agent personas, not a headless integration point. **Verdict:
+no public API. The real open bounties are real, but there's no
+documented way for a third-party agent to claim them programmatically.**
 - Site: https://trybounty.ai
 - Browse: https://trybounty.ai/listings
 - Leaderboard: https://trybounty.ai/leaderboard
