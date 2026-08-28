@@ -1,6 +1,8 @@
+import type { Metadata } from "next";
+
+import { SiteFooter, SiteHeader } from "@/components/site-shell";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import {
   Card,
   CardContent,
@@ -9,6 +11,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import {
+  GITHUB_REPO_URL,
+  RESEARCH_URL,
+  SITE_URL,
+  SUPERTEAM_AGENT_GUIDE_URL,
+} from "@/lib/site";
+import { cn } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  alternates: { canonical: `${SITE_URL}/` },
+};
 
 const STATUS = {
   checkedAt: "2026-08-20",
@@ -20,12 +33,7 @@ const STATUS = {
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-zinc-50 font-sans dark:bg-black">
-      <header className="mx-auto flex w-full max-w-4xl items-center justify-between px-6 py-8">
-        <span className="font-mono text-sm font-semibold tracking-tight">
-          earnbots.fun
-        </span>
-        <Badge variant="outline">build log</Badge>
-      </header>
+      <SiteHeader />
 
       <main className="mx-auto flex w-full max-w-4xl flex-1 flex-col gap-16 px-6 pb-24">
         <section className="flex flex-col gap-6 pt-8">
@@ -36,27 +44,41 @@ export default function Home() {
             Can an AI agent actually earn real money on its own?
           </h1>
           <p className="max-w-xl text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            This is a build log, not a product. I&apos;m trying to get an
-            autonomous agent to find and complete paid bounties, starting
-            with Superteam Earn&apos;s agent API, and logging exactly what
-            happens, good or bad.
+            earnbots.fun is an open build log, not a product or an earnings
+            promise. The experiment tracks whether an autonomous agent can find
+            and complete paid bounties, while recording the useful results and
+            the failures without marketing spin.
           </p>
-          <div className="flex flex-col gap-3 sm:flex-row">
+          <p className="max-w-xl text-zinc-600 dark:text-zinc-400">
+            The first investigation follows Superteam Earn&apos;s published
+            agent workflow. earnbots.fun does not operate a public API, accept
+            bounty submissions, or hold payout credentials; it documents the
+            external experiment and points readers to original sources.
+          </p>
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a
-              href="https://github.com/adamtpang/earnbots.fun"
+              href={RESEARCH_URL}
               target="_blank"
               rel="noopener noreferrer"
               className={cn(buttonVariants({ size: "lg" }))}
             >
-              Follow the repo
+              Start with the sourced research
             </a>
             <a
-              href="https://superteam.fun/earn/agents"
+              href={GITHUB_REPO_URL}
               target="_blank"
               rel="noopener noreferrer"
               className={cn(buttonVariants({ size: "lg", variant: "outline" }))}
             >
-              Superteam Earn agent API
+              Follow the build on GitHub
+            </a>
+            <a
+              href={SUPERTEAM_AGENT_GUIDE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(buttonVariants({ size: "lg", variant: "outline" }))}
+            >
+              Review Superteam&apos;s agent guide
             </a>
           </div>
         </section>
@@ -68,20 +90,25 @@ export default function Home() {
             The honest current state
           </h2>
           <p className="max-w-xl text-zinc-600 dark:text-zinc-400">
-            Checked {STATUS.checkedAt}. No fabricated traction, no
-            &quot;passive income&quot; framing. Just what the API actually
-            returns right now.
+            The latest recorded check was {STATUS.checkedAt}. Superteam&apos;s
+            external listing service returned {STATUS.liveListings} eligible
+            listings, but all {STATUS.liveListings} already showed winners and
+            {" "}
+            {STATUS.openUnclaimed} were both open and unclaimed, so the
+            experiment has not earned money.
           </p>
           <div className="grid gap-4 sm:grid-cols-3">
             <Card>
               <CardHeader>
-                <CardDescription>Agent-eligible listings found</CardDescription>
+                <CardDescription>
+                  Listings returned by Superteam
+                </CardDescription>
                 <CardTitle className="text-3xl">
                   {STATUS.liveListings}
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-zinc-500">
-                via GET /api/agents/listings/live
+                Recorded from Superteam&apos;s published agent workflow.
               </CardContent>
             </Card>
             <Card>
@@ -92,22 +119,25 @@ export default function Home() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-zinc-500">
-                every listing returned already has a winner announced
+                Every returned listing already had a winner announced.
               </CardContent>
             </Card>
             <Card>
               <CardHeader>
-                <CardDescription>Deadline filter</CardDescription>
-                <CardTitle className="text-3xl">Broken</CardTitle>
+                <CardDescription>Documented deadline filter</CardDescription>
+                <CardTitle className="text-3xl">
+                  {STATUS.deadlineFilterWorks ? "Working" : "Broken"}
+                </CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-zinc-500">
-                the documented `deadline` param 500s server-side
+                The external filter returned a server error during the check.
               </CardContent>
             </Card>
           </div>
           <p className="max-w-xl text-sm text-zinc-500">
-            This page will update the moment that changes, with a real
-            listing and a real claim link. Until then, no earnings claims.
+            earnbots.fun will publish a real listing and claim link only after
+            the experiment finds one. Until that happens, the site makes no
+            earnings claim and does not present old listings as available work.
           </p>
         </section>
 
@@ -115,40 +145,48 @@ export default function Home() {
 
         <section className="flex flex-col gap-6">
           <h2 className="text-2xl font-semibold tracking-tight">
-            How this is supposed to work
+            How the external experiment is intended to work
           </h2>
+          <p className="max-w-xl text-zinc-600 dark:text-zinc-400">
+            Superteam Earn&apos;s four-step workflow belongs to that external
+            platform, not to earnbots.fun. This site records observations and
+            source links; registration, listing discovery, submission, and any
+            eventual payout claim happen through Superteam&apos;s own service.
+          </p>
           <div className="grid gap-4 sm:grid-cols-2">
             <Card>
               <CardHeader>
-                <CardTitle className="text-base">1. Register</CardTitle>
+                <CardTitle className="text-base">1. Register there</CardTitle>
                 <CardDescription>
-                  Agent calls POST /api/agents, gets an API key and a claim
-                  code.
+                  The agent registers with Superteam and receives the
+                  credentials and claim code described in its guide.
                 </CardDescription>
               </CardHeader>
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle className="text-base">2. Discover</CardTitle>
+                <CardTitle className="text-base">2. Discover work</CardTitle>
                 <CardDescription>
-                  Agent checks listings marked AGENT_ALLOWED or AGENT_ONLY.
+                  The agent checks Superteam listings marked for agent
+                  participation.
                 </CardDescription>
               </CardHeader>
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle className="text-base">3. Submit</CardTitle>
+                <CardTitle className="text-base">3. Submit there</CardTitle>
                 <CardDescription>
-                  Agent does the work and submits it through the API.
+                  The agent completes the work and submits it through
+                  Superteam&apos;s published workflow.
                 </CardDescription>
               </CardHeader>
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle className="text-base">4. Claim</CardTitle>
+                <CardTitle className="text-base">4. Claim a win</CardTitle>
                 <CardDescription>
-                  If it wins, a human claims the crypto payout with the
-                  claim code.
+                  If the submission wins, a human follows Superteam&apos;s claim
+                  process for the payout.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -162,29 +200,29 @@ export default function Home() {
             Why start with bounties, and what&apos;s next
           </h2>
           <p className="max-w-xl text-zinc-600 dark:text-zinc-400">
-            Before writing any code, I researched every way AI agents are
-            currently making real money online, crypto and non-crypto, and
-            ranked them by how verified the earnings actually are, not by
-            how loud the marketing is.{" "}
+            The project began by researching ways AI agents are reported to
+            make money online, across crypto and non-crypto systems, then
+            ranking them by the evidence behind the earnings rather than the
+            volume of their marketing. The{" "}
             <a
-              href="https://github.com/adamtpang/earnbots.fun/blob/master/RESEARCH.md"
+              href={RESEARCH_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="underline underline-offset-4"
+              className="underline underline-offset-4 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4"
             >
-              Full sourced writeup is in the repo.
-            </a>{" "}
-            The short version: most of the space is unverified marketing
-            claims or one-off windfalls. Superteam Earn&apos;s bounty API is
-            one of the few genuinely audited payout rails, which is why
-            it&apos;s the starting point here, not the whole plan.
+              full sourced writeup is in the repository
+            </a>
+            . Most examples were unverified campaigns or one-off windfalls;
+            Superteam&apos;s documented bounty workflow and past payouts made it
+            a concrete starting point, not proof that this experiment will
+            earn anything.
           </p>
           <div className="grid gap-3 sm:grid-cols-2">
             {[
               {
                 n: "1",
                 t: "Superteam Earn bounties",
-                d: "Real API, real past payouts. Building here first.",
+                d: "Published agent workflow and documented past payouts. Testing it first.",
               },
               {
                 n: "2",
@@ -204,22 +242,22 @@ export default function Home() {
               {
                 n: "5",
                 t: "x402 micropayment agents",
-                d: "Real protocol, ~half the volume is meme-coin noise.",
+                d: "Real protocol, about half the volume was meme-coin noise.",
               },
               {
                 n: "6",
                 t: "Virtuals Protocol agent commerce",
-                d: "Infra is real, autonomous execution is rare per Virtuals' own team.",
+                d: "Infrastructure is real; autonomous execution was rare in the reviewed evidence.",
               },
               {
                 n: "7",
                 t: "Solo-agent crypto windfalls",
-                d: "Truth Terminal-style. Real money, unrealized gains, not repeatable.",
+                d: "Truth Terminal-style: real money, unrealized gains, not repeatable.",
               },
               {
                 n: "8",
                 t: "Adversarial agent games",
-                d: "Freysa-style. Real payout, but to whoever beats the agent.",
+                d: "Freysa-style: a real payout, but to whoever beats the agent.",
               },
             ].map((item) => (
               <Card key={item.n}>
@@ -234,23 +272,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="mx-auto w-full max-w-4xl px-6 py-8 text-sm text-zinc-500">
-        Built by{" "}
-        <a
-          href="https://github.com/adamtpang"
-          className="underline underline-offset-4"
-        >
-          Adam
-        </a>
-        . Source on{" "}
-        <a
-          href="https://github.com/adamtpang/earnbots.fun"
-          className="underline underline-offset-4"
-        >
-          GitHub
-        </a>
-        .
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

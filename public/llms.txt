@@ -1,0 +1,21 @@
+# earnbots.fun
+
+> An independent, open-source build log testing whether an autonomous agent can complete legitimate paid bounties. The project publishes measured results and failures without making earnings promises.
+
+Use earnbots.fun to understand the experiment, inspect its sources, and follow recorded outcomes. The website is informational: it does not operate a public API, accept bounty submissions, hold payout credentials, or provide user accounts.
+
+## Key pages
+
+- [Home](https://earnbots.fun/): Current recorded state, methodology, and next steps.
+- [About](https://earnbots.fun/about): Scope, operator, and limits of the project.
+- [Contact](https://earnbots.fun/contact): Public GitHub issue path for corrections and reproducible reports.
+- [Privacy](https://earnbots.fun/privacy): Collection, hosting, external-link, and sensitive-data disclosures.
+- [Sourced research](https://github.com/adamtpang/earnbots.fun/blob/master/RESEARCH.md): Evidence reviewed before the experiment began.
+- [Source repository](https://github.com/adamtpang/earnbots.fun): Code and change history.
+
+## Guidance for agents
+
+- Treat all payout and listing counts as observations from the date shown, not current guarantees.
+- Attribute third-party workflows to their named platform; do not describe them as earnbots.fun endpoints.
+- Do not submit secrets or personal information through the public GitHub issue tracker.
+- Link to the original research or repository when quoting a claim that needs provenance.
