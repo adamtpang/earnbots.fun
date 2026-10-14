@@ -1,7 +1,7 @@
 export const SITE_NAME = "earnbots.fun";
 export const SITE_URL = "https://earnbots.fun";
 export const SITE_DESCRIPTION =
-  "An open build log testing whether an autonomous agent can complete paid bounties, with sources, measured results, and no earnings promises.";
+  "Study real earning agents, inspect the evidence and test a repeatable way to get paid. An independent experiment with no earnings promises.";
 
 export const GITHUB_PROFILE_URL = "https://github.com/adamtpang";
 export const GITHUB_REPO_URL = `${GITHUB_PROFILE_URL}/earnbots.fun`;

@@ -1,0 +1,30 @@
+name: Public market research
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-market-research
+  cancel-in-progress: true
+
+jobs:
+  observe:
+    if: github.event.repository.private == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Check data validation
+        run: node --test test/market-watch.test.mjs
+      - name: Observe public market data
+        run: node scripts/market-watch.mjs

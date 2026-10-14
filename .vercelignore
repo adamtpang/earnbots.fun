@@ -1,0 +1,7 @@
+.artifacts
+.env*
+actors
+node_modules
+experiments
+test
+DESIGN_AND_AGENT_STUDY_2026-10-14.md
