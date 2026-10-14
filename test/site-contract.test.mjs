@@ -63,7 +63,8 @@ test("homepage exposes the canonical, identity, trust, and security contract", a
   assert.match(html, /href="\/about"/);
   assert.match(html, /href="\/contact"/);
   assert.match(html, /href="\/privacy"/);
-  assert.match(html, /Start with the sourced research/);
+  assert.match(html, /Explore the evidence/);
+  assert.match(html, /no verified Earnbots earnings yet/);
 });
 
 test("crawler discovery files are useful and trust pages are reachable", async () => {
@@ -102,7 +103,7 @@ test("browser and GPTBot receive the same substance without a fabricated contrac
 
   assert.equal(browserResponse.status, 200);
   assert.equal(botResponse.status, 200);
-  assert.match(browserHtml, /The honest current state/);
-  assert.match(botHtml, /The honest current state/);
+  assert.match(browserHtml, /Useful work/);
+  assert.match(botHtml, /Useful work/);
   assert.equal(openApiResponse.status, 404);
 });
